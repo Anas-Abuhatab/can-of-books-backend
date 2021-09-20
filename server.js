@@ -87,18 +87,7 @@ let  getUserBook =  (req,res)=>{
     });
 }
 
-// let createBook=(req,res)=>{
-// const {name ,description,status,email}=req.body;
-// userModel.find({email:email},(ownerData)=>{
-//     ownerData[16].book.push({
-//         name :name,
-//         description: description,
-//         status: status
-//     })
-//     ownerData.save();
-//     res.send(ownerData[16].book)
-// })
-// }
+
 
 
 app.get('/',(req,res)=>{
@@ -106,7 +95,7 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/books',getUserBook);
-// app.post('/books',createBook)
+
 
 
 app.listen(PORT, () => {console.log(`Listening to PORT ${PORT}`)})
