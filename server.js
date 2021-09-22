@@ -1,35 +1,40 @@
 "use strict";
 
-const express =require("express");
+const express = require("express");
 const app = express();
-const cors =require("cors");
-const axios=require("axios");
+const cors = require("cors");
+const axios = require("axios");
 require("dotenv").config();
 app.use(cors());
-const PORT =process.env.PORT;
-const MONGO_SERVER=process.env.MONGO_SERVER;
+const PORT = process.env.PORT;
+const MONGO_SERVER = process.env.MONGO_SERVER;
 const mongoose = require("mongoose");
-const { getBookController } = require("./controllers/book.controller");
+const { getBookController,
+        createBookController,
+        deleteBookController, 
+        updateBookController} = require("./controllers/book.controller");
 // const { bookModle } = require("./modules/book.Model");
+app.use(express.json());
+mongoose.connect(`${MONGO_SERVER}`, { useNewUrlParser: true, useUnifiedTopology: true }).
+    then(() => console.log("Database connected!"))
+    .catch(err => console.log(err));
 
-mongoose.connect(`${MONGO_SERVER}`,{useNewUrlParser: true, useUnifiedTopology: true}).
-then(() => console.log("Database connected!"))
-.catch(err => console.log(err));
+    
 
-app.use(express.json())
-
-
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.status(200).send('iam working')
 })
-
-app.get('/seedData',getBookController);
-
 // app.get("/seedData",(req,res)=>{
 // res.json(seedBook())
 // });
 
 
 
-app.listen(PORT, () => {console.log(`Listening to PORT ${PORT}`)})
+app.get('/seedData', getBookController);
+app.post('/books', createBookController);
+app.delete('/books/:id', deleteBookController);
+app.put('/book/:id',updateBookController);
+
+
+app.listen(PORT, () => { console.log(`Listening to PORT ${PORT}`) });
 
