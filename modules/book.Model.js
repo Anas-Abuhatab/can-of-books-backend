@@ -2,9 +2,7 @@
 
 const Mongoose  = require("mongoose");
 
-
-
-const bookSchema = new Mongoose.Schema({
+const bookSchema =  new Mongoose.Schema({
 
     title:String,
     description:String,
@@ -13,7 +11,7 @@ const bookSchema = new Mongoose.Schema({
     
 });
 
-const bookModle = Mongoose.model('newBook',bookSchema);
+const bookModle =  Mongoose.model('newBook',bookSchema);
 
 // const seedBook=()=>{
 //     let book1=new bookModle({
